@@ -17,7 +17,6 @@ const WeatherApp = () => {
 	const forecastUrl = location
 		? `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location.lat},${location.lon}&days=3`
 		: `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=New York&days=3`;
-
 	useEffect(() => {
 		// Get user location
 		const getLocation = () => {
