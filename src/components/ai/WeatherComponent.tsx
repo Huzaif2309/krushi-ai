@@ -2,153 +2,189 @@
 
 import React, { useState, useEffect } from "react";
 import { BorderBeam } from "../ui/border-beam";
-import { Sun, CloudRain, Wind, Droplet, Thermometer } from "lucide-react"; // Import icons from lucide-react
+import { CloudRain, Wind, Droplet, Thermometer } from "lucide-react";
 
-const WeatherApp = () => {
-	const [weatherData, setWeatherData] = useState(null);
-	const [forecastData, setForecastData] = useState(null);
-	const [location, setLocation] = useState(null);
-	const [error, setError] = useState(null);
+interface Location {
+    lat: number;
+    lon: number;
+}
 
-	const apiKey = "401fae30399545d09cc135616240412";
-	const apiUrl = location
-		? `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location.lat},${location.lon}`
-		: `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=New York`;
-	const forecastUrl = location
-		? `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location.lat},${location.lon}&days=3`
-		: `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=New York&days=3`;
-	useEffect(() => {
-		// Get user location
-		const getLocation = () => {
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(
-					(position) => {
-						const { latitude, longitude } = position.coords;
-						setLocation({ lat: latitude, lon: longitude });
-					},
-					(err) => {
-						setError("Unable to retrieve your location.");
-						console.error(err);
-					}
-				);
-			} else {
-				setError("Geolocation is not supported by this browser.");
-			}
-		};
+interface WeatherData {
+    location: {
+        name: string;
+        country: string;
+    };
+    current: {
+        temp_c: number;
+        condition: {
+            text: string;
+        };
+        humidity: number;
+        wind_kph: number;
+    };
+}
 
-		getLocation();
-	}, []);
+interface ForecastData {
+    forecast: {
+        forecastday: Array<{
+            date: string;
+            day: {
+                maxtemp_c: number;
+                mintemp_c: number;
+                condition: {
+                    text: string;
+                };
+            };
+        }>;
+    };
+}
 
-	useEffect(() => {
-		if (location) {
-			// Fetch current weather data
-			const fetchWeatherData = async () => {
-				try {
-					const response = await fetch(apiUrl);
-					if (!response.ok) throw new Error("Weather data not found.");
-					const data = await response.json();
-					setWeatherData(data);
-					setError(null);
-				} catch (err) {
-					setError(err.message);
-					setWeatherData(null);
-				}
-			};
+const WeatherApp: React.FC = () => {
+    const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+    const [forecastData, setForecastData] = useState<ForecastData | null>(null);
+    const [location, setLocation] = useState<Location | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
-			// Fetch forecast data
-			const fetchForecastData = async () => {
-				try {
-					const response = await fetch(forecastUrl);
-					if (!response.ok) throw new Error("Forecast data not found.");
-					const data = await response.json();
-					setForecastData(data);
-					setError(null);
-				} catch (err) {
-					setError(err.message);
-					setForecastData(null);
-				}
-			};
+    const apiKey = "401fae30399545d09cc135616240412";
+    const apiUrl = location
+        ? `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location.lat},${location.lon}`
+        : `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=New York`;
+    const forecastUrl = location
+        ? `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location.lat},${location.lon}&days=3`
+        : `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=New York&days=3`;
 
-			fetchWeatherData();
-			fetchForecastData();
-		}
-	}, [location]);
+    useEffect(() => {
+        // Get user location
+        const getLocation = () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        setLocation({ lat: latitude, lon: longitude });
+                    },
+                    (err) => {
+                        setError("Unable to retrieve your location.");
+                        console.error(err);
+                    }
+                );
+            } else {
+                setError("Geolocation is not supported by this browser.");
+            }
+        };
 
-	return (
-		<div className="flex flex-col items-center justify-center">
-			{error && <p className="text-red-500 mb-4">{error}</p>}
+        getLocation();
+    }, []);
 
-			{!location && !error && (
-				<p className="text-sm text-gray-500">Fetching your location...</p>
-			)}
+    useEffect(() => {
+        if (location) {
+            // Fetch current weather data
+            const fetchWeatherData = async () => {
+                try {
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) throw new Error("Weather data not found.");
+                    const data: WeatherData = await response.json();
+                    setWeatherData(data);
+                    setError(null);
+                } catch (err) {
+                    setError((err as Error).message);
+                    setWeatherData(null);
+                }
+            };
 
-			{weatherData && (
-				<div className="relative rounded-xl shadow-lg p-4 bg-white dark:bg-gray-800 transition-all duration-300">
-					<h2 className="text-2xl font-semibold text-center my-2 text-transparent bg-clip-text bg-gradient-to-r from-[#16a32a] to-teal-500 ">
-						{weatherData.location.name}, {weatherData.location.country}
-					</h2>
+            // Fetch forecast data
+            const fetchForecastData = async () => {
+                try {
+                    const response = await fetch(forecastUrl);
+                    if (!response.ok) throw new Error("Forecast data not found.");
+                    const data: ForecastData = await response.json();
+                    setForecastData(data);
+                    setError(null);
+                } catch (err) {
+                    setError((err as Error).message);
+                    setForecastData(null);
+                }
+            };
 
-					<div className="grid grid-cols-2 gap-2">
-						<div className="flex items-center text-sm mb-1">
-							<Thermometer className="mr-2 text-[#16a34a]" />
-							Temperature: {weatherData.current.temp_c}°C
-						</div>
+            fetchWeatherData();
+            fetchForecastData();
+        }
+    }, [location, apiUrl, forecastUrl]);
 
-						<div className="flex items-center text-sm mb-1">
-							<CloudRain className="mr-2 text-[#16a34a]" />
-							Condition: {weatherData.current.condition.text}
-						</div>
+    return (
+        <div className="flex flex-col items-center justify-center">
+            {error && <p className="text-red-500 mb-4">{error}</p>}
 
-						<div className="flex items-center text-sm mb-1">
-							<Droplet className="mr-2 text-[#16a34a]" />
-							Humidity: {weatherData.current.humidity}%
-						</div>
+            {!location && !error && (
+                <p className="text-sm text-gray-500">Fetching your location...</p>
+            )}
 
-						<div className="flex items-center text-sm mb-1">
-							<Wind className="mr-2 text-[#16a34a]" />
-							Wind: {weatherData.current.wind_kph} km/h
-						</div>
-					</div>
+            {weatherData && (
+                <div className="relative rounded-xl shadow-lg p-4 bg-white dark:bg-gray-800 transition-all duration-300 border">
+                    <h2 className="text-2xl font-semibold text-center my-2 text-transparent bg-clip-text bg-gradient-to-r from-[#16a32a] to-teal-500 ">
+                        {weatherData.location.name}, {weatherData.location.country}
+                    </h2>
 
-					{forecastData && (
-						<div>
-							<h2 className="text-md font-semibold text-center my-2">
-								3-Day Forecast
-							</h2>
-							<div className="grid grid-cols-2 gap-2">
-								{forecastData.forecast.forecastday.map((day) => (
-									<div
-										key={day.date}
-										className="border p-2 rounded-lg bg-gray-100 dark:bg-gray-700"
-									>
-										<h3 className="text-sm font-semibold">
-											{new Date(day.date).toLocaleDateString()}
-										</h3>
-										<div className="flex items-center">
-											<Thermometer className="mr-1 text-[#16a34a]" />
-											<p className="text-sm mb-1">Max: {day.day.maxtemp_c}°C</p>
-										</div>
-										<div className="flex items-center">
-											<Thermometer className="mr-1 text-[#16a34a]" />
-											<p className="text-sm mb-1">Min: {day.day.mintemp_c}°C</p>
-										</div>
-										<div className="flex items-center">
-											<CloudRain className="mr-1 text-[#16a34a]" />
-											<p className="text-sm mb-2">
-												Condition: {day.day.condition.text}
-											</p>
-										</div>
-									</div>
-								))}
-							</div>
-						</div>
-					)}
+                    <div className="grid grid-cols-2 gap-2">
+                        <div className="flex items-center text-sm mb-1">
+                            <Thermometer className="mr-2 text-[#16a34a]" />
+                            Temperature: {weatherData.current.temp_c}°C
+ </div>
 
-					<BorderBeam />
-				</div>
-			)}
-		</div>
-	);
+                        <div className="flex items-center text-sm mb-1">
+                            <CloudRain className="mr-2 text-[#16a34a]" />
+                            Condition: {weatherData.current.condition.text}
+                        </div>
+
+                        <div className="flex items-center text-sm mb-1">
+                            <Droplet className="mr-2 text-[#16a34a]" />
+                            Humidity: {weatherData.current.humidity}%
+                        </div>
+
+                        <div className="flex items-center text-sm mb-1">
+                            <Wind className="mr-2 text-[#16a34a]" />
+                            Wind: {weatherData.current.wind_kph} km/h
+                        </div>
+                    </div>
+
+                    {forecastData && (
+                        <div>
+                            <h2 className="text-md font-semibold text-center my-2">
+                                3-Day Forecast
+                            </h2>
+                            <div className="grid grid-cols-2 gap-2">
+                                {forecastData.forecast.forecastday.map((day) => (
+                                    <div
+                                        key={day.date}
+                                        className="border p-2 rounded-lg bg-gray-100 dark:bg-gray-700"
+                                    >
+                                        <h3 className="text-sm font-semibold">
+                                            {new Date(day.date).toLocaleDateString()}
+                                        </h3>
+                                        <div className="flex items-center">
+                                            <Thermometer className="mr-1 text-[#16a34a]" />
+                                            <p className="text-sm mb-1">Max: {day.day.maxtemp_c}°C</p>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <Thermometer className="mr-1 text-[#16a34a]" />
+                                            <p className="text-sm mb-1">Min: {day.day.mintemp_c}°C</p>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <CloudRain className="mr-1 text-[#16a34a]" />
+                                            <p className="text-sm mb-2">
+                                                Condition: {day.day.condition.text}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    <BorderBeam />
+                </div>
+            )}
+        </div>
+    );
 };
 
 export default WeatherApp;
