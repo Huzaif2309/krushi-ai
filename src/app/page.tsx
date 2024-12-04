@@ -6,6 +6,7 @@ import Fertiliser from "@/components/ai/Fertiliser";
 import Particles from "../components/ui/particles";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { CloudSunRain } from "lucide-react";
 
 export default function Home() {
 	const [color, setColor] = useState("#ffff00");
@@ -29,7 +30,7 @@ export default function Home() {
 			<div className="flex flex-col md:flex-row gap-6 h-fit">
 				<div className="w-full md:w-1/3 h-full">
 					<h2 className="text-center text-[#16a34a] font-bold text-2xl mb-2">
-						Weather Forecast
+          <CloudSunRain /> Weather Forecast
 					</h2>
 					<WeatherApp />
 				</div>
