@@ -34,7 +34,7 @@ const data = [
     id: 5,
     name: "Kisan Credit Card (KCC)",
     link: "https://www.nabard.org/",
-    photo: "/govweb/kcc.jpeg",
+    photo: "/govweb/kcc.png",
   },
 ];
 
