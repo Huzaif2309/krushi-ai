@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+</head>
+<body>
+    <h1>Crop Prediction Result</h1>
+    <p><strong>Predicted Crop:</strong> {{ predicted_crop }}</p>
+    <h2>Features Recorded at real time:</h2>
+    <ul>
+        <li><strong>Nitrogen:</strong> {{ features[0] | round(2) }} ppm</li>
+        <li><strong>Phosphorus:</strong> {{ features[1] | round(2) }}</li>
+        <li><strong>Potassium:</strong> {{ features[2] | round(2) }}</li>
+        <li><strong>Temperature:</strong> {{ features[3] | round(2) }}</li>
+        <li><strong>Humidity:</strong> {{ features[4] | round(2) }}</li>
+        <li><strong>pH Value:</strong> {{ features[5] | round(2) }}</li>
+        <li><strong>Rainfall:</strong> {{ features[6] | round(2) }}</li>
+    </ul>
+    <a href="/">Back to Map</a>
+</body>
+</html>
+
