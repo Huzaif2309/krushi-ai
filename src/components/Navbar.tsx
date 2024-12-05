@@ -40,7 +40,7 @@ const Navbar = () => {
 				{/* Desktop Navigation */}
 				<div className="flex-row hidden md:flex">
 					<Button
-						onClick={() => router.push("/analyze")}
+						onClick={() => router.push("http://127.0.0.1:7000/kuchtohhai/templates/map.html")}
 						variant="outline"
 						className="border-none hover:scale-105 transition-all duration-300"
 					>
@@ -103,7 +103,7 @@ const Navbar = () => {
 							<DropdownMenuLabel>Menu</DropdownMenuLabel>
 							<DropdownMenuSeparator />
 							<DropdownMenuGroup>
-								<DropdownMenuItem onClick={() => router.push("/analyze")}>
+								<DropdownMenuItem onClick={() => router.push("http://127.0.0.1:7000/kuchtohhai/templates/map.html")}>
 									<ChartArea />
 									<span>Analyze Crop Yields</span>
 								</DropdownMenuItem>

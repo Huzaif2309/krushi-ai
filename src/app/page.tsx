@@ -13,7 +13,6 @@ import { MarqueeDemo } from "@/components/Marquee";
 import TypingAnimation from "@/components/ui/typing-animation";
 import { useRouter } from "next/navigation";
 import AiChatbot from "@/components/ai/ChatBot";
-import { Chart } from "chart.js";
 
 const herotext = [
   { language: "English", script: "Krushi-AI" },
@@ -64,7 +63,7 @@ export default function Home() {
         </p>
         <RainbowButton
           onClick={() => {
-            router.push("/analyze");
+            router.push("http://127.0.0.1:3001/kuchtohhai/templates/map.html");
           }}
         >
           Analyze Crop Yields
@@ -117,8 +116,6 @@ export default function Home() {
       </div>
       <div className="sdg"></div>
       <AiChatbot />
-
-      <Chart />
     </div>
   );
 }
