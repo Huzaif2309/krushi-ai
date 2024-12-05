@@ -1,0 +1,128 @@
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #000000; /* Black background for dark mode */
+    color: #ffffff; /* White text for contrast */
+}
+
+#map-container {
+    width: 70%;
+    background-color: #1a1a1a; /* Dark gray for map container */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    border-radius: 0; /* No border radius for full height */
+    display: flex;
+    flex-direction: column;
+}
+
+#map {
+    height: 100vh; /* Full screen height */
+    border: 2px solid #333333; /* Subtle border for the map */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#sidebar {
+    width: 30%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #121212; /* Darker sidebar background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    overflow-y: auto; /* Ensure the sidebar is scrollable */
+}
+
+#predict-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000; /* Black text for contrast on green */
+    background-color: #16a32a; /* Vibrant green for buttons */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#predict-button:hover {
+    background-color: #128724;
+    box-shadow: 0 4px 8px rgba(22, 163, 42, 0.8);
+}
+
+#predict-button:disabled {
+    background-color: #555555; /* Muted gray for disabled button */
+    color: #888888; /* Muted colors for disabled button */
+    cursor: not-allowed;
+}
+
+#prediction-results {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #1a1a1a; /* Matches map container background */
+    border: 1px solid #333333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    min-height: 200px;
+    overflow-y: auto;
+}
+
+#prediction-results h3 {
+    color: #16a32a; /* Vibrant green for headings */
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#prediction-results p {
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.prediction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #121212; /* Slight contrast for items */
+    transition: background-color 0.3s;
+}
+
+.prediction-item:hover {
+    background-color: #1f1f1f;
+}
+
+.prediction-probability {
+    font-weight: bold;
+    color: #16a32a;
+}
+
+.features-details {
+    margin-top: 20px;
+}
+
+.features-details summary {
+    font-weight: bold;
+    cursor: pointer;
+    color: #16a32a;
+    margin-bottom: 5px;
+}
+
+.features-details pre {
+    padding: 10px;
+    background-color: #1a1a1a;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 14px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #e0e0e0; /* Light gray for text */
+}
+
+details[open] summary {
+    color: #128724;
+}
