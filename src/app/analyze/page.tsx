@@ -4,8 +4,109 @@ export default function Prediction() {
 
   return (
     <div>
+      <div>
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+        mai aa gaya
+      </div>
       <div style={{ height: "100vh", width: "100%" }}>
-        <iframe
+        {/* <iframe
           src="https://sfps7p8b-7000.asse.devtunnels.ms/"
           style={{
             width: "100%",
@@ -13,7 +114,7 @@ export default function Prediction() {
             border: "none",
           }}
           title="Flask App"
-        />
+        /> */}
     </div>
     </div>
   );
