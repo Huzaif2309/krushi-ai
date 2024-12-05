@@ -63,7 +63,7 @@ const Navbar = () => {
 					</DropdownMenuGroup>
 					<DropdownMenuSeparator />
 					<DropdownMenuGroup>
-						<DropdownMenuItem>
+						<DropdownMenuItem onClick={()=>{router.push('/contact')}}>
                             <Send />
 							<span>Contact Us</span>
 						</DropdownMenuItem>
