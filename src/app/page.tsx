@@ -63,7 +63,7 @@ export default function Home() {
         </p>
         <RainbowButton
           onClick={() => {
-            router.push("http://127.0.0.1:3001/kuchtohhai/templates/map.html");
+            router.push("https://65hqhf12-7000.inc1.devtunnels.ms/");
           }}
         >
           Analyze Crop Yields

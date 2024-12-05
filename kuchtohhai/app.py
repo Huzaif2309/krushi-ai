@@ -6,16 +6,21 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 import random
 import json
 
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)
+
+
 
 # Load model, scaler, and label encoder
-with open('crop_recommendation_model.pkl', 'rb') as model_file:
+with open(fr'app\crop_recommendation_model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
-with open('std_scaler.pkl', 'rb') as scaler_file:
+with open(fr'app\std_scaler.pkl', 'rb') as scaler_file:
     std_scaler = pickle.load(scaler_file)
 
 # Load original dataset for reference
-df = pd.read_csv('Crop_Recommendation.csv')
+df = pd.read_csv('app\Crop_Recommendation.csv')
 label_encoder = LabelEncoder()
 label_encoder.fit(df['Crop'])
 
@@ -94,4 +99,5 @@ def predict_crop():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=7000)
+    # Run the app on all interfaces
+    app.run(debug=True, host='0.0.0.0', port=7000)

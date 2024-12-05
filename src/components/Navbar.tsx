@@ -17,19 +17,11 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-	ClerkProvider,
-	SignedIn,
-	SignedOut,
-	SignInButton,
-	SignUpButton,
-	UserButton,
-} from "@clerk/nextjs";
+
 
 const Navbar = () => {
 	const router = useRouter();
 	return (
-		<ClerkProvider>
 			<div className="flex flex-row justify-around items-center p-4 fixed z-10 w-full bg-white dark:bg-black">
 				{/* Logo Section */}
 				<div className="font-bold text-xl md:text-3xl flex flex-row justify-center items-center gap-2">
@@ -40,7 +32,7 @@ const Navbar = () => {
 				{/* Desktop Navigation */}
 				<div className="flex-row hidden md:flex">
 					<Button
-						onClick={() => router.push("http://127.0.0.1:7000/kuchtohhai/templates/map.html")}
+						onClick={() => router.push("https://65hqhf12-7000.inc1.devtunnels.ms/")}
 						variant="outline"
 						className="border-none hover:scale-105 transition-all duration-300"
 					>
@@ -58,37 +50,6 @@ const Navbar = () => {
 				{/* Mode Toggle and Clerk Buttons */}
 				<div className="flex flex-row items-center gap-4">
 					<ModeToggle />
-					<SignedOut>
-						{/* Show Sign-In and Sign-Up buttons for signed-out users */}
-						<SignInButton>
-							<Button
-								variant="outline"
-								className="hover:scale-105 transition-all duration-300"
-							>
-								Sign In
-							</Button>
-						</SignInButton>
-						<SignUpButton>
-							<Button
-								variant="outline"
-								className="hover:scale-105 transition-all duration-300"
-							>
-								Sign Up
-							</Button>
-						</SignUpButton>
-					</SignedOut>
-					<SignedIn>
-						{/* Show UserButton for signed-in users */}
-						<UserButton
-							afterSignOutUrl="/"
-							appearance={{
-								elements: {
-									rootBox:
-										"rounded-full shadow-md hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600",
-								},
-							}}
-						/>
-					</SignedIn>
 				</div>
 
 				{/* Mobile Menu */}
@@ -103,7 +64,7 @@ const Navbar = () => {
 							<DropdownMenuLabel>Menu</DropdownMenuLabel>
 							<DropdownMenuSeparator />
 							<DropdownMenuGroup>
-								<DropdownMenuItem onClick={() => router.push("http://127.0.0.1:7000/kuchtohhai/templates/map.html")}>
+								<DropdownMenuItem onClick={() => router.push("https://65hqhf12-7000.inc1.devtunnels.ms/")}>
 									<ChartArea />
 									<span>Analyze Crop Yields</span>
 								</DropdownMenuItem>
@@ -133,7 +94,6 @@ const Navbar = () => {
 					</DropdownMenu>
 				</div>
 			</div>
-		</ClerkProvider>
 	);
 };
 
