@@ -14,13 +14,13 @@ CORS(app)
 
 
 # Load model, scaler, and label encoder
-with open(fr'app\crop_recommendation_model.pkl', 'rb') as model_file:
+with open(fr'kuchtohhai\crop_recommendation_model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
-with open(fr'app\std_scaler.pkl', 'rb') as scaler_file:
+with open(fr'kuchtohhai\std_scaler.pkl', 'rb') as scaler_file:
     std_scaler = pickle.load(scaler_file)
 
 # Load original dataset for reference
-df = pd.read_csv('app\Crop_Recommendation.csv')
+df = pd.read_csv('kuchtohhai\Crop_Recommendation.csv')
 label_encoder = LabelEncoder()
 label_encoder.fit(df['Crop'])
 
