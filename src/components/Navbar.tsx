@@ -32,7 +32,7 @@ const Navbar = () => {
 				{/* Desktop Navigation */}
 				<div className="flex-row hidden md:flex">
 					<Button
-						onClick={() => router.push("https://65hqhf12-7000.inc1.devtunnels.ms/")}
+						onClick={() => router.push("https://8t9b3j30-7000.inc1.devtunnels.ms//")}
 						variant="outline"
 						className="border-none hover:scale-105 transition-all duration-300"
 					>
