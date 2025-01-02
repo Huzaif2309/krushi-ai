@@ -5,22 +5,20 @@ from flask import Flask, render_template, request, jsonify
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 import random
 import json
-
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
 
-
-
 # Load model, scaler, and label encoder
-with open(fr'kuchtohhai\crop_recommendation_model.pkl', 'rb') as model_file:
+# Load model, scaler, and label encoder
+with open('crop_recommendation_model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
-with open(fr'kuchtohhai\std_scaler.pkl', 'rb') as scaler_file:
+with open('std_scaler.pkl', 'rb') as scaler_file:
     std_scaler = pickle.load(scaler_file)
 
 # Load original dataset for reference
-df = pd.read_csv('kuchtohhai\Crop_Recommendation.csv')
+df = pd.read_csv('Crop_Recommendation.csv')
 label_encoder = LabelEncoder()
 label_encoder.fit(df['Crop'])
 
@@ -40,8 +38,13 @@ def predict_crop():
     
     try:
         # Get polygon coordinates from the request
-        data = request.json
-        polygon_coords = data['polygon_coords']
+        data = request.get_json()
+        if data is None:
+            return jsonify({'error': 'Invalid JSON data'}), 400
+            
+        polygon_coords = data.get('polygon_coords')
+        if polygon_coords is None:
+            return jsonify({'error': 'Missing polygon_coords in request'}), 400
         
         # Reset predictions if all crops have been used
         if len(PREVIOUS_PREDICTIONS) >= len(CROP_OPTIONS):
